@@ -1,7 +1,7 @@
 # TRMNL HA Bridge
 
-[![Lint](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yaml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yaml)
-[![Builder](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yaml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yaml)
+[![Lint](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yml)
+[![Builder](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yml)
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
 
