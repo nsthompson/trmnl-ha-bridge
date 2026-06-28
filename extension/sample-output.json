@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-06-27T10:15:00+00:00",
+  "generated_label": "Jun 27, 3:55 PM",
+  "location": "Home",
+  "weather": {
+    "entity_id": "weather.forecast_home",
+    "condition": "partlycloudy",
+    "condition_label": "Partly Cloudy",
+    "temperature": 22.5,
+    "temperature_unit": "°C",
+    "apparent_temperature": 23.1,
+    "humidity": 58,
+    "pressure": 1013.2,
+    "pressure_unit": "hPa",
+    "wind_speed": 14,
+    "wind_speed_unit": "km/h",
+    "wind_bearing": 200,
+    "friendly_name": "Forecast Home"
+  },
+  "forecast": [
+    {
+      "datetime": "2026-06-27T00:00:00+00:00",
+      "day": "Fri",
+      "date_label": "27 Jun",
+      "condition": "sunny",
+      "condition_label": "Sunny",
+      "high": 25,
+      "low": 14,
+      "precipitation": 0,
+      "precipitation_probability": 5
+    },
+    {
+      "datetime": "2026-06-28T00:00:00+00:00",
+      "day": "Sat",
+      "date_label": "28 Jun",
+      "condition": "partlycloudy",
+      "condition_label": "Partly Cloudy",
+      "high": 23,
+      "low": 13,
+      "precipitation": 0,
+      "precipitation_probability": 10
+    },
+    {
+      "datetime": "2026-06-29T00:00:00+00:00",
+      "day": "Sun",
+      "date_label": "29 Jun",
+      "condition": "rainy",
+      "condition_label": "Rain",
+      "high": 19,
+      "low": 12,
+      "precipitation": 6.4,
+      "precipitation_probability": 80
+    },
+    {
+      "datetime": "2026-06-30T00:00:00+00:00",
+      "day": "Mon",
+      "date_label": "30 Jun",
+      "condition": "cloudy",
+      "condition_label": "Cloudy",
+      "high": 21,
+      "low": 13,
+      "precipitation": 1.2,
+      "precipitation_probability": 40
+    }
+  ],
+  "air_quality": {
+    "entity_id": "sensor.air_quality_index",
+    "available": true,
+    "value": 75,
+    "category": "Moderate",
+    "category_short": "Moderate",
+    "level": 2,
+    "unit": "AQI",
+    "gauge_angle": -63.0,
+    "gauge_needle": "M17.92 37.66L51.36 51.33L48.64 56.67Z",
+    "gauge_ticks": [
+      {
+        "x": 11.96,
+        "y": 41.64
+      },
+      {
+        "x": 17.64,
+        "y": 30.49
+      },
+      {
+        "x": 26.49,
+        "y": 21.64
+      },
+      {
+        "x": 37.64,
+        "y": 15.96
+      },
+      {
+        "x": 62.36,
+        "y": 15.96
+      }
+    ]
+  },
+  "sensors": [
+    {
+      "entity_id": "sensor.living_room_temperature",
+      "label": "Living Room",
+      "value": 21.5,
+      "unit": "°C",
+      "device_class": "temperature",
+      "available": true
+    },
+    {
+      "entity_id": "sensor.bedroom_temperature",
+      "label": "Bedroom",
+      "value": 19.8,
+      "unit": "°C",
+      "device_class": "temperature",
+      "available": true
+    },
+    {
+      "entity_id": "sensor.living_room_humidity",
+      "label": "Humidity",
+      "value": 47,
+      "unit": "%",
+      "device_class": "humidity",
+      "available": true
+    },
+    {
+      "entity_id": "sensor.office_co2",
+      "label": "Office CO₂",
+      "value": 612,
+      "unit": "ppm",
+      "device_class": "carbon_dioxide",
+      "available": true
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "sensor.solar_power",
+      "label": "Solar",
+      "value": 1840,
+      "unit": "W",
+      "device_class": "power",
+      "available": true
+    },
+    {
+      "entity_id": "sensor.house_consumption",
+      "label": "Usage",
+      "value": 920,
+      "unit": "W",
+      "device_class": "power",
+      "available": true
+    }
+  ],
+  "errors": []
+}

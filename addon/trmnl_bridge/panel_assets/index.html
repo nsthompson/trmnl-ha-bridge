@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRMNL HA Bridge</title>
+<link rel="stylesheet" href="__BASE__panel.css">
+</head><body>
+<div class="head">
+  <h1>TRMNL HA Bridge</h1>
+  <button id="theme" title="Toggle light / dark">🌙</button>
+</div>
+<p class="sub">Type to search your Home Assistant entities (autocomplete suggests matches
+as you type). Saving applies live; point one Terminus Poll extension at each
+feed URL.</p>
+<div class="tabs">
+  <button class="tab active" data-tab="feeds">Feeds</button>
+  <button class="tab" data-tab="templates">Templates</button>
+</div>
+<div id="panel-feeds" class="panel">
+  <div id="feeds"></div>
+  <div class="bar">
+    <button id="addWeather">+ Weather feed</button>
+    <button id="addSensors">+ Sensor feed</button>
+    <button id="save" class="primary">Save</button>
+    <span id="status"></span>
+  </div>
+</div>
+<div id="panel-templates" class="panel" hidden>
+  <div id="templates"></div>
+</div>
+<div id="dl"></div>
+<script>window.__BRIDGE_BASE__="__BASE__";</script>
+<script src="__BASE__panel.js"></script>
+</body></html>

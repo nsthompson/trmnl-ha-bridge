@@ -1,0 +1,62 @@
+{% comment %}
+  Reusable monochrome (1-bit-friendly) weather icons for TRMNL/Terminus.
+
+  Terminus's editor has no Liquid partials, so this is a copy-paste block:
+  paste the STYLE + CAPTURE DEFINITIONS section ONCE near the top of your
+  template's content, then use the SELECTOR snippet wherever you want an icon.
+
+  Icons are solid FILLED glyphs built from ONLY <path> (filled discs are drawn
+  as arc paths too — the device mis-positions <circle>, and drops strokes /
+  fill=none / transforms entirely). The <style> just controls size. Default
+  40px; wrap in `.wx-lg` for the large variant.
+
+  Driven by Home Assistant's standard `condition` strings (which the WeatherFlow
+  Forecast integration emits): sunny, clear-night, partlycloudy, cloudy, fog,
+  rainy, pouring, hail, snowy, snowy-rainy, lightning, lightning-rainy, windy,
+  windy-variant, exceptional.
+{% endcomment %}
+
+{% comment %} ============ STYLE + CAPTURE DEFINITIONS (paste once) ============ {% endcomment %}
+<style>
+  .wx-icon { display: block; width: 40px; height: 40px; margin: 0 auto; }
+  .wx-lg .wx-icon { width: 88px; height: 88px; }
+</style>
+
+{% capture svg_open %}<svg class="wx-icon" viewBox="0 0 24 24" width="40" height="40" fill="black">{% endcapture %}
+{% capture svg_sunny %}{{ svg_open }}<path d="M7.6 12a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0Z"/><path d="M12.0 1.2L13.35 5.8L10.65 5.8Z"/><path d="M19.64 4.36L17.34 8.57L15.43 6.66Z"/><path d="M22.8 12.0L18.2 13.35L18.2 10.65Z"/><path d="M19.64 19.64L15.43 17.34L17.34 15.43Z"/><path d="M12.0 22.8L10.65 18.2L13.35 18.2Z"/><path d="M4.36 19.64L6.66 15.43L8.57 17.34Z"/><path d="M1.2 12.0L5.8 10.65L5.8 13.35Z"/><path d="M4.36 4.36L8.57 6.66L6.66 8.57Z"/></svg>{% endcapture %}
+{% capture svg_clear_night %}{{ svg_open }}<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>{% endcapture %}
+{% capture svg_partlycloudy %}{{ svg_open }}<path d="M4.5 7a3 3 0 1 0 6 0a3 3 0 1 0 -6 0Z"/><path d="M7.5 0.4L8.55 2.6L6.45 2.6Z"/><path d="M2.83 2.33L5.13 3.15L3.65 4.63Z"/><path d="M0.9 7.0L3.1 5.95L3.1 8.05Z"/><path d="M2.83 11.67L3.65 9.37L5.13 10.85Z"/><path d="M9.9 13.5a3.6 3.6 0 1 0 7.2 0a3.6 3.6 0 1 0 -7.2 0Z"/><path d="M7.9 15.8a2.9 2.9 0 1 0 5.8 0a2.9 2.9 0 1 0 -5.8 0Z"/><path d="M13.6 15.8a2.9 2.9 0 1 0 5.8 0a2.9 2.9 0 1 0 -5.8 0Z"/><path d="M10.8 14.5h5.7v4.2h-5.7z"/></svg>{% endcapture %}
+{% capture svg_cloudy %}{{ svg_open }}<path d="M7.8 11.5a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0 -8.4 0Z"/><path d="M4.9 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M12.5 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M8.2 13h7.6v4.3h-7.6z"/></svg>{% endcapture %}
+{% capture svg_fog %}{{ svg_open }}<path d="M8.5 8.5a3.5 3.5 0 1 0 7.0 0a3.5 3.5 0 1 0 -7.0 0Z"/><path d="M5.7 10a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0Z"/><path d="M12.2 10a2.8 2.8 0 1 0 5.6 0a2.8 2.8 0 1 0 -5.6 0Z"/><path d="M8.5 9h6.5v3.5h-6.5z"/><path d="M3.5 15.5h17v1.7h-17z"/><path d="M5.5 19h13v1.7h-13z"/></svg>{% endcapture %}
+{% capture svg_rainy %}{{ svg_open }}<path d="M7.8 11.5a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0 -8.4 0Z"/><path d="M4.9 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M12.5 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M8.2 13h7.6v4.3h-7.6z"/><path d="M7.9 18.5h1.2v3.3h-1.2z"/><path d="M11.4 19.5h1.2v3.3h-1.2z"/><path d="M14.9 18.5h1.2v3.3h-1.2z"/></svg>{% endcapture %}
+{% capture svg_snowy %}{{ svg_open }}<path d="M7.8 11.5a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0 -8.4 0Z"/><path d="M4.9 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M12.5 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M8.2 13h7.6v4.3h-7.6z"/><path d="M7.4 20a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0Z"/><path d="M10.9 21.2a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0Z"/><path d="M14.4 20a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0Z"/></svg>{% endcapture %}
+{% capture svg_lightning %}{{ svg_open }}<path d="M7.8 11.5a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0 -8.4 0Z"/><path d="M4.9 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M12.5 14a3.3 3.3 0 1 0 6.6 0a3.3 3.3 0 1 0 -6.6 0Z"/><path d="M8.2 13h7.6v4.3h-7.6z"/><path d="M12.5 13L8.5 19.5L11.2 19.5L9.8 23.5L15 16.5L12.2 16.5L14 13Z"/></svg>{% endcapture %}
+{% capture svg_windy %}{{ svg_open }}<path d="M2 7.2h13v1.8h-13z"/><path d="M2 11.1h18v1.8h-18z"/><path d="M2 15h10.5v1.8h-10.5z"/></svg>{% endcapture %}
+{% capture svg_alert %}{{ svg_open }}<path fill-rule="evenodd" d="M12 3 22.5 21.5 1.5 21.5Z M11 9.5 H13 V15 H11 Z M11 16.8 H13 V18.8 H11 Z"/></svg>{% endcapture %}
+
+{% comment %} ============ SELECTOR (paste where you want an icon) ============
+  Set `cond` to a condition string, run the case to fill `wx`, then output `wx`.
+  Example, large current icon:
+      {% assign cond = source_1.weather.condition %}
+      ...case block...
+      <div class="wx-lg">{{ wx }}</div>
+  Example, small forecast icon (inside the day loop):
+      {% assign cond = day.condition %}
+      ...case block...
+      {{ wx }}
+
+{% assign cond = source_1.weather.condition %}
+{% case cond %}
+  {% when 'sunny' %}{% assign wx = svg_sunny %}
+  {% when 'clear-night' %}{% assign wx = svg_clear_night %}
+  {% when 'partlycloudy' %}{% assign wx = svg_partlycloudy %}
+  {% when 'cloudy' %}{% assign wx = svg_cloudy %}
+  {% when 'fog' %}{% assign wx = svg_fog %}
+  {% when 'rainy', 'pouring' %}{% assign wx = svg_rainy %}
+  {% when 'snowy', 'snowy-rainy', 'hail' %}{% assign wx = svg_snowy %}
+  {% when 'lightning', 'lightning-rainy' %}{% assign wx = svg_lightning %}
+  {% when 'windy', 'windy-variant' %}{% assign wx = svg_windy %}
+  {% else %}{% assign wx = svg_alert %}
+{% endcase %}
+{{ wx }}
+============================================================================ {% endcomment %}

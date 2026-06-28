@@ -1,0 +1,32 @@
+---
+# Plugin metadata + poll configuration.
+#
+# This file is for the TRMNL private-plugin format / `trmnlp` local dev server
+# (https://github.com/usetrmnl/trmnlp). Terminus's own "Extensions" UI does not
+# read this file — there you configure the same values in the web form (see
+# SETUP.md) — but it documents the exact poll settings and keeps this plugin
+# importable into trmnlp or the TRMNL cloud for previewing.
+
+name: HA Weather
+# Poll an HTTP URL on a schedule; expose the JSON as `source_1`.
+strategy: polling
+
+# URL of a TRMNL HA Bridge feed on your LAN. Use the HA host/IP reachable from
+# wherever Terminus runs (NOT localhost unless Terminus is on the same host).
+# Replace <slug> with the feed's slug from the add-on config.
+polling_url: http://YOUR-HA-HOST:8080/feeds/<slug>.json
+polling_verb: get
+# No auth needed (the add-on talks to HA itself; no token on the device).
+polling_headers: ""
+
+# Seconds between refreshes. HA data rarely needs to be fast; keep it gentle
+# on an e-ink/battery device. 900s = 15 min.
+refresh_interval: 900
+
+# 1-bit e-ink: keep the default light theme.
+dark_mode: "no"
+no_screen_padding: "no"
+
+# No user-facing form fields — all configuration lives in the bridge's
+# config.json. (You could surface entity overrides here later if desired.)
+custom_fields: []

@@ -1,0 +1,18 @@
+---
+configuration:
+  cache_ttl:
+    name: Cache TTL (seconds)
+    description: >-
+      How long a feed's data is cached before HA is queried again. E-ink
+      refreshes slowly, so a few minutes keeps load off HA. Minimum 30.
+  request_timeout:
+    name: Request timeout (seconds)
+    description: How long to wait for each Home Assistant API call.
+  log_level:
+    name: Log level
+    description: Verbosity of the add-on log.
+  feeds:
+    name: Feeds
+    description: >-
+      One entry per TRMNL screen / sensor combination. Each feed is served at
+      its own URL (/feeds/<slug>.json) for a separate Terminus Poll extension.

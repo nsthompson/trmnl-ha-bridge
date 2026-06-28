@@ -1,0 +1,17 @@
+# Secrets / local standalone config — never commit these.
+.env
+*.env
+feeds.json
+config.json
+
+# Editor / tooling local state
+.claude/
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Preview tool (local venv + generated PNGs/HTML)
+tools/.preview-venv/
+tools/preview-output/
