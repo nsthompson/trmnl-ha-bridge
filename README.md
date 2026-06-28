@@ -1,4 +1,11 @@
-# HA Weather — TRMNL OG + Home Assistant
+# TRMNL HA Bridge
+
+[![Lint](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yaml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/lint.yaml)
+[![Builder](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yaml/badge.svg)](https://github.com/nsthompson/trmnl-ha-bridge/actions/workflows/builder.yaml)
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+[![Open your Home Assistant instance and show the add-on store with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/?repository_url=https%3A%2F%2Fgithub.com%2Fnsthompson%2Ftrmnl-ha-bridge)
 
 Show **current weather, a multi-day forecast, indoor sensors, and any other
 Home Assistant entities** on a TRMNL OG e-ink display (800×480, 1-bit) — fully
@@ -66,8 +73,10 @@ trmnl-ha-bridge/
 
 ### 1. Install the add-on
 
-- **Repository install**: HA → **Settings → Add-ons → Add-on Store** → ⋮ →
-  **Repositories** → add this project's Git URL → install **TRMNL HA Bridge**.
+- **Repository install**: click the **Open your Home Assistant instance** badge
+  above (or HA → **Settings → Add-ons → Add-on Store** → ⋮ → **Repositories** →
+  add `https://github.com/nsthompson/trmnl-ha-bridge`) → install
+  **TRMNL HA Bridge**.
 - **Local install**: copy the [`addon/`](addon) folder into your HA `/addons`
   share; it appears under **Local add-ons**.
 
@@ -177,3 +186,6 @@ is created under `tools/.preview-venv` on first run.
   list-of-dicts format.
 - The Liquid templates use only TRMNL framework classes confirmed against
   <https://trmnl.com/framework> (v3.1).
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
