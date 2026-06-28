@@ -6,9 +6,9 @@ description: >-
   Serves Home Assistant weather, forecast and sensor data as TRMNL/Terminus
   JSON feeds for e-ink displays. Define any number of feeds entirely in the UI.
 url: https://github.com/nsthompson/trmnl-ha-bridge
-# Pre-built multi-arch images published by .github/workflows on push to main.
-# The {arch} placeholder is substituted per architecture by the HA builder.
-image: "ghcr.io/nsthompson/{arch}-trmnl-ha-bridge"
+# Pre-built multi-arch image published by .github/workflows on push to main.
+# The builder publishes per-arch images plus a multi-arch manifest at this name.
+image: "ghcr.io/nsthompson/trmnl-ha-bridge"
 # TRMNL/Terminus runs outside HA, so the feed must be reachable on the network.
 arch:
   - aarch64

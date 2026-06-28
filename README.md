@@ -41,8 +41,7 @@ trmnl-ha-bridge/
 ├── README.md                # this file
 ├── addon/                   # the Home Assistant add-on (TRMNL HA Bridge)
 │   ├── config.yaml          # manifest + UI options schema (feeds, sensors…)
-│   ├── build.yaml           # HA base images per arch
-│   ├── Dockerfile
+│   ├── Dockerfile           # multi-arch HA base + Python/PyYAML runtime
 │   ├── run.sh               # bashio entrypoint
 │   ├── bridge.py            # the app (multi-feed; add-on or standalone)
 │   ├── translations/en.yaml # nice UI labels
