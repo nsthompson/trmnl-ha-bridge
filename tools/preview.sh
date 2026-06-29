@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #
-# preview.sh — rasterize an HA Weather Liquid view to an 800x480 PNG using the
-# real TRMNL framework CSS + headless Google Chrome, so you can eyeball a
-# template before pushing it to Terminus / the device. Can render the static
-# sample, a local JSON file, or LIVE data polled from the running bridge.
+# preview.sh — rasterize an HA Weather Liquid view to a PNG at its true slot
+# size (TRMNL OG, or TRMNL X for the `-x` views) using the real TRMNL framework
+# CSS + headless Google Chrome, so you can eyeball a template before pushing it
+# to Terminus / the device. Can render the static sample, a local JSON file, or
+# LIVE data polled from the running bridge.
 #
 # Usage:
 #   tools/preview.sh                         # all views, from the bundled sample
@@ -116,14 +117,19 @@ else
   done
 fi
 
-# --- each view's true slot size on the TRMNL OG -------------------------------
+# --- each view's true slot size --------------------------------------------
+# OG (800x480) views, and the TRMNL X (1872x1404) `-x` variants.
 slot_size() {
   case "$1" in
-    full)            echo "800 480" ;;
-    half_horizontal) echo "800 240" ;;
-    half_vertical)   echo "400 480" ;;
-    quadrant)        echo "400 240" ;;
-    *)               echo "800 480" ;;   # sensible default
+    full)              echo "800 480" ;;
+    half_horizontal)   echo "800 240" ;;
+    half_vertical)     echo "400 480" ;;
+    quadrant)          echo "400 240" ;;
+    full-x)            echo "1872 1404" ;;
+    half_horizontal-x) echo "1872 702" ;;
+    half_vertical-x)   echo "936 1404" ;;
+    quadrant-x)        echo "936 702" ;;
+    *)                 echo "800 480" ;;   # sensible default
   esac
 }
 

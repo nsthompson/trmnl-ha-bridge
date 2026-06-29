@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0
+
+- **TRMNL X support:** four new greyscale templates for the 10.3" TRMNL X
+  (1872×1404, 16-level greyscale) — `full-x`, `half_horizontal-x`,
+  `half_vertical-x`, and `quadrant-x`. They mirror the OG layouts at the X's
+  larger scale and use soft greys for separators, the footer band, and caption
+  labels (which the X renders cleanly where the 1-bit OG could not), keeping
+  icons and primary numbers crisp black. They appear in the **Templates** tab
+  alongside the OG set, tagged *Weather (TRMNL X)* with their slot sizes. The OG
+  templates are unchanged. The local preview tool renders the `-x` views at the
+  X's slot sizes with the `screen--lg screen--4bit` device class.
+
 ## 1.1.1
 
 - **Remove `feeds` from the add-on options/schema.** Feeds have been managed in

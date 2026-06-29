@@ -3,35 +3,68 @@
 # overlaid so you can add your own without rebuilding the add-on). Drop a new
 # <name>.liquid here, add an entry below, and it appears in the Templates tab
 # automatically — this is not weather-specific.
+#
+# Two device families are bundled: the TRMNL OG (800x480, 1-bit black/white)
+# and the larger TRMNL X (1872x1404, 4-bit greyscale, the `-x` variants).
 templates:
   - file: full.liquid
     label: Full
     size: 800×480
-    category: Weather
+    category: Weather (TRMNL OG)
     description: >-
       Flagship full-screen layout: current conditions with an icon and adaptive
-      headline temperature, a feels-like / humidity / wind column, an AQI dial,
+      headline temperature, a feels-like / humidity / wind column, an AQI face,
       a multi-day forecast strip, and a sensor grid. Maps to a feed that has
       weather, forecast, AQI, and sensors.
   - file: half_horizontal.liquid
     label: Half — Horizontal
     size: 800×240
-    category: Weather
+    category: Weather (TRMNL OG)
     description: >-
       A wide half-screen slot: current conditions on the left, the next two
-      forecast days, and a compact AQI dial. Good for a top or bottom band in a
+      forecast days, and a compact AQI face. Good for a top or bottom band in a
       Terminus mashup.
   - file: half_vertical.liquid
     label: Half — Vertical
     size: 400×480
-    category: Weather
+    category: Weather (TRMNL OG)
     description: >-
-      A tall half-screen slot: current conditions over a compact AQI gauge and a
+      A tall half-screen slot: current conditions over a compact AQI face and a
       short list of sensor readings. Good for a left or right column in a mashup.
   - file: quadrant.liquid
     label: Quadrant
     size: 400×240
-    category: Weather
+    category: Weather (TRMNL OG)
     description: >-
       The smallest slot: just the essentials — icon, temperature, condition,
       humidity, and a one-line AQI summary.
+  - file: full-x.liquid
+    label: Full — TRMNL X
+    size: 1872×1404
+    category: Weather (TRMNL X)
+    description: >-
+      The full layout rebuilt for the 10.3" TRMNL X (16-level greyscale):
+      current conditions with a large icon and headline temperature, a
+      feels-like / humidity / wind row, an AQI face, a multi-day forecast strip,
+      and a sensor grid — with soft-grey separators, footer band, and captions.
+  - file: half_horizontal-x.liquid
+    label: Half — Horizontal — TRMNL X
+    size: 1872×702
+    category: Weather (TRMNL X)
+    description: >-
+      Wide half-screen TRMNL X slot: current conditions, the next two forecast
+      days, and a compact AQI face — vertically centred, with greyscale accents.
+  - file: half_vertical-x.liquid
+    label: Half — Vertical — TRMNL X
+    size: 936×1404
+    category: Weather (TRMNL X)
+    description: >-
+      Tall half-screen TRMNL X slot: current conditions over an AQI block and a
+      short list of sensor readings, evenly spaced with greyscale accents.
+  - file: quadrant-x.liquid
+    label: Quadrant — TRMNL X
+    size: 936×702
+    category: Weather (TRMNL X)
+    description: >-
+      Smallest TRMNL X slot: icon, temperature, condition, humidity and a
+      one-line AQI summary, centred.

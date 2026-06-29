@@ -29,7 +29,9 @@ on the add-on host — no rebuild needed; it appears in the panel automatically.
 
 ## These bundled copies
 
-`full/half_horizontal/half_vertical/quadrant.liquid` are copies of
-`../../extension/views/*.liquid`. Keep them in sync after edits:
+The `*.liquid` files here are copies of `../../extension/views/*.liquid` — the
+TRMNL OG layouts plus the TRMNL X (`-x`) greyscale variants. Keep them in sync
+after edits (the `_weather-icons.liquid` reference partial is intentionally not
+bundled):
 
-    cp ../../extension/views/{full,half_horizontal,half_vertical,quadrant}.liquid .
+    cp ../../extension/views/{full,half_horizontal,half_vertical,quadrant}{,-x}.liquid .

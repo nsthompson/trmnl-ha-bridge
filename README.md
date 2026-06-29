@@ -8,8 +8,9 @@
 [![Open your Home Assistant instance and show the add-on store with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/?repository_url=https%3A%2F%2Fgithub.com%2Fnsthompson%2Ftrmnl-ha-bridge)
 
 Show **current weather, a multi-day forecast, indoor sensors, and any other
-Home Assistant entities** on a TRMNL OG e-ink display (800×480, 1-bit) — fully
-local, no cloud.
+Home Assistant entities** on a TRMNL e-ink display — the **OG** (800×480, 1-bit)
+or the larger **TRMNL X** (1872×1404, 16-level greyscale) — fully local, no
+cloud.
 
 It has two parts:
 
@@ -62,6 +63,10 @@ trmnl-ha-bridge/
 │   │   ├── half_horizontal.liquid   # 800×240
 │   │   ├── half_vertical.liquid     # 400×480
 │   │   ├── quadrant.liquid          # 400×240
+│   │   ├── full-x.liquid            # TRMNL X 1872×1404 (greyscale)
+│   │   ├── half_horizontal-x.liquid # TRMNL X 1872×702
+│   │   ├── half_vertical-x.liquid   # TRMNL X 936×1404
+│   │   ├── quadrant-x.liquid        # TRMNL X 936×702
 │   │   └── _weather-icons.liquid    # canonical icon/face reference block
 │   ├── settings.yml         # poll config (for trmnlp / private-plugin import)
 │   ├── sample-output.json   # the JSON shape a feed serves (source_1)
@@ -125,7 +130,8 @@ JSON file, or **live data polled from the running bridge**:
 
 ```bash
 tools/preview.sh                  # render every view from the bundled sample
-tools/preview.sh full             # just one
+tools/preview.sh full             # just one (TRMNL OG)
+tools/preview.sh full-x           # the TRMNL X variant (1872×1404, greyscale)
 SAMPLE=my-feed.json tools/preview.sh full          # a custom local JSON file
 
 # Live data from the add-on (validates the payload, then renders it):
@@ -146,8 +152,10 @@ weather/forecast presence, AQI range, unavailable entities, and any errors the
 bridge itself reported — so you catch a misconfigured entity or a stale feed
 before it reaches the device. `--validate` exits non-zero on a hard failure
 (useful for CI). PNGs land in `tools/preview-output/<view>.png`, each at its true
-TRMNL OG slot size (full 800×480, half_horizontal 800×240, half_vertical
-400×480, quadrant 400×240).
+slot size — TRMNL OG (full 800×480, half_horizontal 800×240, half_vertical
+400×480, quadrant 400×240) or, for the `-x` views, TRMNL X (full-x 1872×1404,
+half_horizontal-x 1872×702, half_vertical-x 936×1404, quadrant-x 936×702). The
+`-x` views render with the `screen--lg screen--4bit` device class.
 
 Requires `python3`, `curl`, Google Chrome/Chromium, and network access (the
 framework CSS + fonts load from trmnl.com); a local venv with `python-liquid`
@@ -158,8 +166,12 @@ is created under `tools/.preview-venv` on first run.
 - **Forecast API**: HA removed the inline `forecast` weather attribute (~2024.x).
   The bridge uses `POST /api/services/weather/get_forecasts?return_response`. If
   a forecast is empty, confirm the entity supports the chosen `forecast_type`.
-- **1-bit design**: pure black/white only. Numeric readouts use `value--tnums`
-  so digits stay aligned across refreshes.
+- **1-bit design** (TRMNL OG): pure black/white only. Numeric readouts use
+  `value--tnums` so digits stay aligned across refreshes.
+- **Device variants**: the OG templates target 800×480 1-bit; the `-x` templates
+  target the **TRMNL X** (1872×1404, 16-level greyscale) — same data, scaled up,
+  with soft-grey separators / footer / captions. The same feed drives either;
+  just paste the template matching your device. One feed, any device.
 - **Feels-like**: if your weather integration doesn't expose an apparent
   temperature (e.g. WeatherFlow Forecast), set a feed's `feels_like_entity` to a
   sensor that does — it fills `weather.apparent_temperature` so the "Feels like"

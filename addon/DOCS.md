@@ -110,7 +110,9 @@ config panel gives you everything to copy:
 1. In the panel, each feed shows its **Terminus Exchange URL**
    (`http://<HA-host>:8080/feeds/<slug>.json`) with a **Copy URL** button.
 2. The **Terminus templates** section lists the full set of layouts (full,
-   half_horizontal, half_vertical, quadrant) with **Copy template** buttons.
+   half_horizontal, half_vertical, quadrant) with **Copy template** buttons —
+   for the **TRMNL OG** (800×480, 1-bit) and the larger **TRMNL X** (1872×1404,
+   greyscale — the `-x` variants). Pick the one matching your device.
 3. In Terminus: **Extensions → ＋ → Kind = Poll**, paste a template into the
    editor, add an **Exchange** with the feed URL, then **Build**. The parsed JSON
    is available to the template as `source_1`. One extension per feed.

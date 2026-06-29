@@ -15,8 +15,9 @@ and no access token to create (the add-on talks to HA through the Supervisor).
 - Two feed types: **Weather feed** (weather + forecast + AQI + sensors) or a
   generic **Sensor feed** (sensor/entity readings only).
 - A **Templates** tab serves ready-to-paste Liquid layouts (full / half / quadrant)
-  and is extensible — drop your own `.liquid` + `templates.yaml` into
-  `/data/templates`.
+  for both the **TRMNL OG** (800×480, 1-bit) and the larger **TRMNL X**
+  (1872×1404, greyscale — the `-x` variants). Extensible — drop your own
+  `.liquid` + `templates.yaml` into `/data/templates`.
 
 ## Install
 
