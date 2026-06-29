@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.2.1
+
+- **Fix TRMNL X template sizing.** The X is a high-DPI panel: its 1872×1404 are
+  *physical* pixels, but plugins render in CSS pixels at ~half that (≈936×702),
+  scaled up. The 1.2.0 `-x` templates were authored against the physical size,
+  so on a real device the type was ~2× too large and overflowed (wind/forecast
+  wrapping, the headline pushed off-screen). All four `-x` layouts are retuned to
+  the device's logical CSS canvas (full-x 936×702, half_horizontal-x 936×351,
+  half_vertical-x 468×702, quadrant-x 468×351), and the local preview tool now
+  renders them at those logical sizes so what you see matches the device.
+- **Fix the AQI face ring.** The ring is drawn as a filled annulus; the device's
+  renderer ignores `fill-rule="evenodd"`, so it filled solid black. Switched to
+  an opposite-winding donut (reversed inner circle) that carves the hole under
+  the default nonzero rule, so it renders on the device.
+- **Even forecast + sensor spacing** on `full` and `full-x`: the rows now use
+  `space-evenly`, so the gaps between items and to the left/right screen edges
+  are equal (previously they ran edge-to-edge).
+- **Rename the AQI heading to "Outdoor AQI"** across all templates.
+
 ## 1.2.0
 
 - **TRMNL X support:** four new greyscale templates for the 10.3" TRMNL X

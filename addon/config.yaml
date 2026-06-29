@@ -1,6 +1,6 @@
 ---
 name: TRMNL HA Bridge
-version: "1.2.0"
+version: "1.2.1"
 slug: trmnl_ha_bridge
 description: >-
   Serves Home Assistant weather, forecast and sensor data as TRMNL/Terminus

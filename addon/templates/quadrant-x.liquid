@@ -11,13 +11,13 @@
 
       {% comment %} ===== weather icon definitions (paste once, keep at top) ===== {% endcomment %}
       <style>
-        .wx-icon { display: block; width: 100px; height: 100px; margin: 0 auto; overflow: visible; }
-        .wx-lg .wx-icon { width: 168px; height: 168px; }
+        .wx-icon { display: block; width: 52px; height: 52px; margin: 0 auto; overflow: visible; }
+        .wx-lg .wx-icon { width: 84px; height: 84px; }
         .xmute { color: #5a5a5a; }
         /* .content shrink-wraps inside the full-width flex-row .item; centre it */
         .item { justify-content: center; }
         /* spread the sparse stack so it fills the slot instead of clustering */
-        .content { gap: 22px; }
+        .content { gap: 10px; }
       </style>
       {% capture svg_open %}<svg class="wx-icon" viewBox="0 0 24 24" width="40" height="40" fill="black">{% endcapture %}
       {% capture svg_sunny %}{{ svg_open }}<path d="M7.6 12a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0Z"/><path d="M12.0 1.2L13.35 5.8L10.65 5.8Z"/><path d="M19.64 4.36L17.34 8.57L15.43 6.66Z"/><path d="M22.8 12.0L18.2 13.35L18.2 10.65Z"/><path d="M19.64 19.64L15.43 17.34L17.34 15.43Z"/><path d="M12.0 22.8L10.65 18.2L13.35 18.2Z"/><path d="M4.36 19.64L6.66 15.43L8.57 17.34Z"/><path d="M1.2 12.0L5.8 10.65L5.8 13.35Z"/><path d="M4.36 4.36L8.57 6.66L6.66 8.57Z"/></svg>{% endcapture %}
@@ -49,14 +49,14 @@
             {% else %}{% assign wx = svg_alert %}
           {% endcase %}
           <div class="wx-lg">{{ wx }}</div>
-          {% assign _t = w.temperature | round %}<span class="value {% if _t >= 100 or _t <= -10 %}value--xxlarge{% else %}value--xxxlarge{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
-          <span class="label label--xlarge">{{ w.condition_label }}</span>
+          {% assign _t = w.temperature | round %}<span class="value {% if _t >= 100 or _t <= -10 %}value--large{% else %}value--xlarge{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
+          <span class="label label--large">{{ w.condition_label }}</span>
           {% if w.humidity %}
-          <span class="description description--xlarge xmute">{{ w.humidity | round }}% humidity</span>
+          <span class="description xmute">{{ w.humidity | round }}% humidity</span>
           {% endif %}
           {% assign aq = source_1.air_quality %}
           {% if aq.available %}
-          <span class="description description--xlarge xmute">AQI {{ aq.value }} &middot; {{ aq.category_short }}</span>
+          <span class="description xmute">Outdoor AQI {{ aq.value }} &middot; {{ aq.category_short }}</span>
           {% endif %}
         </div>
       </div>

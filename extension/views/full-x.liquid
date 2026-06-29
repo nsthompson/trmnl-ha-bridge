@@ -19,14 +19,22 @@
 
       {% comment %} ===== weather icon definitions (paste once, keep at top) ===== {% endcomment %}
       <style>
-        .wx-icon { display: block; width: 150px; height: 150px; margin: 0 auto; overflow: visible; }
-        .wx-lg .wx-icon { width: 280px; height: 280px; }
-        .wx-current { display: flex; align-items: center; justify-content: center; gap: 52px; }
-        .wx-details { display: flex; gap: 80px; justify-content: center; margin-top: 36px; }
+        .wx-icon { display: block; width: 72px; height: 72px; margin: 0 auto; overflow: visible; }
+        .wx-lg .wx-icon { width: 132px; height: 132px; }
+        .wx-current { display: flex; align-items: center; justify-content: center; gap: 24px; }
+        .wx-details { display: flex; gap: 44px; justify-content: center; margin-top: 16px; }
         .wx-details > div { display: flex; flex-direction: column; align-items: center; }
-        .aqi-face { display: block; width: 210px; height: 210px; margin: 18px auto 0; }
+        .aqi-face { display: block; width: 100px; height: 100px; margin: 10px auto 0; }
         /* muted grey caption — own class so it cleanly overrides .label colour */
         .xmute { color: #5a5a5a; }
+        /* Even horizontal distribution for the forecast + sensor rows: equal gap
+           between items AND from the left/right screen edges (space-evenly).
+           The framework lays these out edge-to-edge (flex--fill / auto-fit grid)
+           with gaps only between items, so override to content-width items. */
+        .columns { justify-content: space-evenly !important; gap: 0 !important; }
+        .columns > .column { flex: 0 1 auto !important; width: auto !important; max-width: none !important; }
+        .grid { display: flex !important; justify-content: space-evenly !important; gap: 0 !important; }
+        .grid > .item { flex: 0 1 auto !important; width: auto !important; }
       </style>
       {% capture svg_open %}<svg class="wx-icon" viewBox="0 0 24 24" width="40" height="40" fill="black">{% endcapture %}
       {% capture svg_sunny %}{{ svg_open }}<path d="M7.6 12a4.4 4.4 0 1 0 8.8 0a4.4 4.4 0 1 0 -8.8 0Z"/><path d="M12.0 1.2L13.35 5.8L10.65 5.8Z"/><path d="M19.64 4.36L17.34 8.57L15.43 6.66Z"/><path d="M22.8 12.0L18.2 13.35L18.2 10.65Z"/><path d="M19.64 19.64L15.43 17.34L17.34 15.43Z"/><path d="M12.0 22.8L10.65 18.2L13.35 18.2Z"/><path d="M4.36 19.64L6.66 15.43L8.57 17.34Z"/><path d="M1.2 12.0L5.8 10.65L5.8 13.35Z"/><path d="M4.36 4.36L8.57 6.66L6.66 8.57Z"/></svg>{% endcapture %}
@@ -40,7 +48,7 @@
       {% capture svg_windy %}{{ svg_open }}<path d="M2 7.2h13v1.8h-13z"/><path d="M2 11.1h18v1.8h-18z"/><path d="M2 15h10.5v1.8h-10.5z"/></svg>{% endcapture %}
       {% capture svg_alert %}{{ svg_open }}<path fill-rule="evenodd" d="M12 3 22.5 21.5 1.5 21.5Z M11 9.5 H13 V15 H11 Z M11 16.8 H13 V18.8 H11 Z"/></svg>{% endcapture %}
       {% comment %} ===== AQI level-of-concern faces (black fills only) ===== {% endcomment %}
-      {% capture face_open %}<svg class="aqi-face" viewBox="0 0 24 24" width="54" height="54" fill="black"><path fill-rule="evenodd" d="M0.5 12A11.5 11.5 0 1 0 23.5 12A11.5 11.5 0 1 0 0.5 12ZM1.8 12A10.2 10.2 0 1 0 22.2 12A10.2 10.2 0 1 0 1.8 12Z"/>{% endcapture %}
+      {% capture face_open %}<svg class="aqi-face" viewBox="0 0 24 24" width="54" height="54" fill="black"><path d="M0.5 12A11.5 11.5 0 1 0 23.5 12A11.5 11.5 0 1 0 0.5 12ZM1.8 12A10.2 10.2 0 1 1 22.2 12A10.2 10.2 0 1 1 1.8 12Z"/>{% endcapture %}
       {% capture face_eyes %}<path d="M6.8 9a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0Z"/><path d="M13.8 9a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0Z"/>{% endcapture %}
       {% capture face_good %}{{ face_open }}{{ face_eyes }}<path d="M5.5 12.5A7 7 0 0 0 18.5 12.5Z"/></svg>{% endcapture %}
       {% capture face_moderate %}{{ face_open }}{{ face_eyes }}<path d="M7 13A5.5 5.5 0 0 0 17 13Z"/></svg>{% endcapture %}
@@ -75,23 +83,23 @@
             <div class="wx-lg">{{ wx }}</div>
             <div style="display:flex;flex-direction:column;align-items:flex-start">
               {% assign _t = w.temperature | round %}
-              <span class="value {% if _t >= 100 or _t <= -10 %}value--giga{% else %}value--tera{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
-              <span class="label label--xxlarge">{{ w.condition_label }}</span>
+              <span class="value {% if _t >= 100 or _t <= -10 %}value--xlarge{% else %}value--xxlarge{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
+              <span class="label label--large">{{ w.condition_label }}</span>
             </div>
           </div>
           <div class="wx-details">
-            {% if w.apparent_temperature %}<div><span class="value value--xxxlarge value--tnums">{{ w.apparent_temperature | round }}{{ w.temperature_unit }}</span><span class="label label--xlarge xmute">Feels like</span></div>{% endif %}
-            {% if w.humidity %}<div><span class="value value--xxxlarge value--tnums">{{ w.humidity | round }}%</span><span class="label label--xlarge xmute">Humidity</span></div>{% endif %}
-            {% if w.wind_speed %}<div><span class="value value--xxxlarge value--tnums">{{ w.wind_speed | round }} {{ w.wind_speed_unit }}</span><span class="label label--xlarge xmute">Wind</span></div>{% endif %}
+            {% if w.apparent_temperature %}<div><span class="value value--base value--tnums">{{ w.apparent_temperature | round }}{{ w.temperature_unit }}</span><span class="label xmute">Feels like</span></div>{% endif %}
+            {% if w.humidity %}<div><span class="value value--base value--tnums">{{ w.humidity | round }}%</span><span class="label xmute">Humidity</span></div>{% endif %}
+            {% if w.wind_speed %}<div><span class="value value--base value--tnums">{{ w.wind_speed | round }} {{ w.wind_speed_unit }}</span><span class="label xmute">Wind</span></div>{% endif %}
           </div>
         </div>
         {% assign aq = source_1.air_quality %}
         {% if aq.available %}
         <div>
           <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
-            <span class="label label--xxlarge xmute">AQI</span>
-            <span class="value value--mega value--tnums">{{ aq.value }}</span>
-            <span class="label label--xlarge xmute">{{ aq.category_short }}</span>
+            <span class="label label--large xmute">Outdoor AQI</span>
+            <span class="value value--xlarge value--tnums">{{ aq.value }}</span>
+            <span class="label xmute">{{ aq.category_short }}</span>
             {% case aq.level %}
               {% when 1 %}{% assign face = face_good %}
               {% when 2 %}{% assign face = face_moderate %}
@@ -109,13 +117,13 @@
       <!-- Forecast strip (icon per day), with a soft grey separator above it -->
       {% if source_1.forecast.size > 0 %}
       <div>
-      <svg width="100%" height="3" preserveAspectRatio="none" fill="#9b9b9b" style="display:block;width:100%;height:3px;margin:0 0 20px"><path d="M0 0H4000V3H0Z"/></svg>
+      <svg width="100%" height="3" preserveAspectRatio="none" fill="#9b9b9b" style="display:block;width:100%;height:2px;margin:0 0 12px"><path d="M0 0H4000V3H0Z"/></svg>
       <div class="columns">
         {% for day in source_1.forecast %}
         <div class="column">
           <div class="item">
             <div class="content text--center">
-              <span class="label label--xxlarge xmute">{{ day.day }}</span>
+              <span class="label label--large xmute">{{ day.day }}</span>
               {% case day.condition %}
                 {% when 'sunny' %}{% assign wx = svg_sunny %}
                 {% when 'clear-night' %}{% assign wx = svg_clear_night %}
@@ -129,9 +137,9 @@
                 {% else %}{% assign wx = svg_alert %}
               {% endcase %}
               {{ wx }}
-              <span class="value value--xxlarge value--tnums">{{ day.high | round }}&deg; / {{ day.low | round }}&deg;</span>
+              <span class="value value--base value--tnums">{{ day.high | round }}&deg; / {{ day.low | round }}&deg;</span>
               {% if day.precipitation_probability and day.precipitation_probability > 0 %}
-              <span class="label label--xlarge xmute">{{ day.precipitation_probability | round }}%</span>
+              <span class="label xmute">{{ day.precipitation_probability | round }}%</span>
               {% endif %}
             </div>
           </div>
@@ -145,13 +153,13 @@
       {% assign rows = source_1.sensors | concat: source_1.entities %}
       {% if rows.size > 0 %}
       <div>
-      <svg width="100%" height="3" preserveAspectRatio="none" fill="#9b9b9b" style="display:block;width:100%;height:3px;margin:0 0 20px"><path d="M0 0H4000V3H0Z"/></svg>
+      <svg width="100%" height="3" preserveAspectRatio="none" fill="#9b9b9b" style="display:block;width:100%;height:2px;margin:0 0 12px"><path d="M0 0H4000V3H0Z"/></svg>
       <div class="grid">
         {% for s in rows limit:5 %}
         <div class="item">
           <div class="content">
-            <span class="value value--xlarge value--tnums">{% if s.available %}{{ s.value }}{{ s.unit }}{% else %}&mdash;{% endif %}</span>
-            <span class="label label--large xmute">{{ s.label }}</span>
+            <span class="value value--base value--tnums">{% if s.available %}{{ s.value }}{{ s.unit }}{% else %}&mdash;{% endif %}</span>
+            <span class="label xmute">{{ s.label }}</span>
           </div>
         </div>
         {% endfor %}

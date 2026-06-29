@@ -118,17 +118,19 @@ else
 fi
 
 # --- each view's true slot size --------------------------------------------
-# OG (800x480) views, and the TRMNL X (1872x1404) `-x` variants.
+# OG (800x480) views, and the TRMNL X `-x` variants. The X is a high-DPI panel:
+# its physical 1872x1404 is rendered from a ~2x-smaller CSS canvas (936x702),
+# so author/preview the -x views in those *logical* CSS pixels.
 slot_size() {
   case "$1" in
     full)              echo "800 480" ;;
     half_horizontal)   echo "800 240" ;;
     half_vertical)     echo "400 480" ;;
     quadrant)          echo "400 240" ;;
-    full-x)            echo "1872 1404" ;;
-    half_horizontal-x) echo "1872 702" ;;
-    half_vertical-x)   echo "936 1404" ;;
-    quadrant-x)        echo "936 702" ;;
+    full-x)            echo "936 702" ;;
+    half_horizontal-x) echo "936 351" ;;
+    half_vertical-x)   echo "468 702" ;;
+    quadrant-x)        echo "468 351" ;;
     *)                 echo "800 480" ;;   # sensible default
   esac
 }

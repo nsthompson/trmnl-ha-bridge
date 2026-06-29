@@ -11,9 +11,9 @@
 
       {% comment %} ===== weather icon definitions (paste once, keep at top) ===== {% endcomment %}
       <style>
-        .wx-icon { display: block; width: 130px; height: 130px; margin: 0 auto; overflow: visible; }
-        .wx-lg .wx-icon { width: 210px; height: 210px; }
-        .aqi-face { display: block; width: 156px; height: 156px; margin: 8px auto; }
+        .wx-icon { display: block; width: 62px; height: 62px; margin: 0 auto; overflow: visible; }
+        .wx-lg .wx-icon { width: 92px; height: 92px; }
+        .aqi-face { display: block; width: 78px; height: 78px; margin: 4px auto; }
         .xmute { color: #5a5a5a; }
       </style>
       {% capture svg_open %}<svg class="wx-icon" viewBox="0 0 24 24" width="40" height="40" fill="black">{% endcapture %}
@@ -28,7 +28,7 @@
       {% capture svg_windy %}{{ svg_open }}<path d="M2 7.2h13v1.8h-13z"/><path d="M2 11.1h18v1.8h-18z"/><path d="M2 15h10.5v1.8h-10.5z"/></svg>{% endcapture %}
       {% capture svg_alert %}{{ svg_open }}<path fill-rule="evenodd" d="M12 3 22.5 21.5 1.5 21.5Z M11 9.5 H13 V15 H11 Z M11 16.8 H13 V18.8 H11 Z"/></svg>{% endcapture %}
       {% comment %} ===== AQI level-of-concern faces (black fills only) ===== {% endcomment %}
-      {% capture face_open %}<svg class="aqi-face" viewBox="0 0 24 24" width="54" height="54" fill="black"><path fill-rule="evenodd" d="M0.5 12A11.5 11.5 0 1 0 23.5 12A11.5 11.5 0 1 0 0.5 12ZM1.8 12A10.2 10.2 0 1 0 22.2 12A10.2 10.2 0 1 0 1.8 12Z"/>{% endcapture %}
+      {% capture face_open %}<svg class="aqi-face" viewBox="0 0 24 24" width="54" height="54" fill="black"><path d="M0.5 12A11.5 11.5 0 1 0 23.5 12A11.5 11.5 0 1 0 0.5 12ZM1.8 12A10.2 10.2 0 1 1 22.2 12A10.2 10.2 0 1 1 1.8 12Z"/>{% endcapture %}
       {% capture face_eyes %}<path d="M6.8 9a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0Z"/><path d="M13.8 9a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0 -3.4 0Z"/>{% endcapture %}
       {% capture face_good %}{{ face_open }}{{ face_eyes }}<path d="M5.5 12.5A7 7 0 0 0 18.5 12.5Z"/></svg>{% endcapture %}
       {% capture face_moderate %}{{ face_open }}{{ face_eyes }}<path d="M7 13A5.5 5.5 0 0 0 17 13Z"/></svg>{% endcapture %}
@@ -57,15 +57,15 @@
             {% else %}{% assign wx = svg_alert %}
           {% endcase %}
           <div class="wx-lg">{{ wx }}</div>
-          {% assign _t = w.temperature | round %}<span class="value {% if _t >= 100 or _t <= -10 %}value--mega{% else %}value--giga{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
-          <span class="label label--xxlarge">{{ w.condition_label }}</span>
+          {% assign _t = w.temperature | round %}<span class="value {% if _t >= 100 or _t <= -10 %}value--large{% else %}value--xlarge{% endif %} value--tnums">{{ _t }}{{ w.temperature_unit }}</span>
+          <span class="label label--large">{{ w.condition_label }}</span>
         </div>
 
         <!-- two-day forecast + AQI, shifted to the right edge -->
-        <div style="display:flex;align-items:center;gap:72px;flex:0 0 auto">
+        <div style="display:flex;align-items:center;gap:44px;flex:0 0 auto">
           {% for day in source_1.forecast limit:2 %}
           <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
-            <span class="label label--xxlarge xmute">{{ day.day }}</span>
+            <span class="label label--large xmute">{{ day.day }}</span>
             {% case day.condition %}
               {% when 'sunny' %}{% assign wx = svg_sunny %}
               {% when 'clear-night' %}{% assign wx = svg_clear_night %}
@@ -79,13 +79,13 @@
               {% else %}{% assign wx = svg_alert %}
             {% endcase %}
             {{ wx }}
-            <span class="value value--xxlarge value--tnums">{{ day.high | round }}&deg;/{{ day.low | round }}&deg;</span>
+            <span class="value value--base value--tnums">{{ day.high | round }}&deg;/{{ day.low | round }}&deg;</span>
           </div>
           {% endfor %}
           {% if aq.available %}
           <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
-            <span class="label label--xxlarge xmute">AQI</span>
-            <span class="value value--xxxlarge value--tnums">{{ aq.value }}</span>
+            <span class="label label--large xmute">Outdoor AQI</span>
+            <span class="value value--large value--tnums">{{ aq.value }}</span>
             {% case aq.level %}
               {% when 1 %}{% assign face = face_good %}
               {% when 2 %}{% assign face = face_moderate %}
@@ -95,7 +95,7 @@
               {% else %}{% assign face = face_hazardous %}
             {% endcase %}
             {{ face }}
-            <span class="label label--xlarge xmute">{{ aq.category_short }}</span>
+            <span class="label xmute">{{ aq.category_short }}</span>
           </div>
           {% endif %}
         </div>
