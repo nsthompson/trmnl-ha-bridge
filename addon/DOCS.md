@@ -27,32 +27,34 @@ display (or several) can show any number of sensors or sensor combinations.
 2. Either install from the repository (⋮ → **Repositories** → add the Git URL,
    then pick **TRMNL HA Bridge**), or copy this `addon/` folder into your HA
    `/addons` share to install it as a **Local add-on**.
-3. Open the add-on, go to **Configuration**, set up your feeds (below), then
-   **Start** it. Enable **Start on boot** and **Watchdog**.
+3. **Start** the add-on (enable **Start on boot** and **Watchdog**), then set up
+   your feeds in the config panel (below).
 
-## Configuration — two ways
+## Configuration
 
-**Config panel (recommended).** After starting the add-on, open it and click
-**Open Web UI** (it also appears in the HA sidebar as *TRMNL Bridge*). The panel
-lists your Home Assistant entities as **dropdowns** — pick the weather, feels-like,
-and AQI entities and add sensor rows without typing entity IDs. **Save** applies
-immediately (no restart); the choices are stored in `/data/feeds.json`.
+### Feeds — in the config panel
 
-**Configuration tab (advanced / fallback).** The options below are also editable
-as YAML in the add-on's **Configuration** tab. On first start the panel is seeded
-from these; after that the panel (`/data/feeds.json`) is the source of truth for
-feeds, while `cache_ttl` / `request_timeout` / `log_level` stay here.
+Feeds are managed entirely in the **config panel**, not in the add-on options.
+After starting the add-on, open it and click **Open Web UI** (it also appears in
+the HA sidebar as *TRMNL Bridge*). The panel lists your Home Assistant entities
+as **dropdowns** — pick the weather, feels-like, and AQI entities and add sensor
+rows without typing entity IDs. **Save** applies immediately (no restart); the
+feeds are stored in `/data/feeds.json`.
 
-All options are in the **Configuration** tab.
+### Add-on options — the Configuration tab
+
+The **Configuration** tab holds only runtime settings (feeds are no longer here):
 
 | Option            | Meaning                                                       |
 |-------------------|---------------------------------------------------------------|
 | `cache_ttl`       | Seconds a feed is cached before re-querying HA (default 300). |
 | `request_timeout` | Per-request timeout to HA, in seconds.                        |
 | `log_level`       | Add-on log verbosity.                                         |
-| `feeds`           | The list of feeds — add/remove as many as you like.          |
 
-Each **feed** has:
+### Feed fields (reference)
+
+Each **feed** you add in the panel has these fields (this is also the shape of
+each entry in `/data/feeds.json`):
 
 | Field            | Meaning                                                        |
 |------------------|----------------------------------------------------------------|
@@ -70,32 +72,34 @@ Each **feed** has:
 `sensors` and `entities` are two named buckets with the same shape so a
 template can lay them out separately. Add as many entries as fit your layout.
 
-### Example (two feeds)
+### Example feeds
+
+Two feeds — one weather, one sensors-only — as you would set them up in the
+panel (shown here as the structure stored in `/data/feeds.json`):
 
 ```yaml
-cache_ttl: 300
-feeds:
-  - slug: living-room
-    location: Living Room
-    weather_entity: weather.forecast_home
-    forecast_days: 4
-    sensors:
-      - entity_id: sensor.living_room_temperature
-        label: Temp
-      - entity_id: sensor.living_room_humidity
-        label: Humidity
-  - slug: energy
-    location: Energy
-    entities:
-      - entity_id: sensor.solar_power
-        label: Solar
-        unit: W
-      - entity_id: sensor.house_consumption
-        label: Usage
-        unit: W
+- slug: living-room
+  location: Living Room
+  weather_entity: weather.forecast_home
+  forecast_days: 4
+  sensors:
+    - entity_id: sensor.living_room_temperature
+      label: Temp
+    - entity_id: sensor.living_room_humidity
+      label: Humidity
+- slug: energy
+  type: sensors
+  location: Energy
+  entities:
+    - entity_id: sensor.solar_power
+      label: Solar
+      unit: W
+    - entity_id: sensor.house_consumption
+      label: Usage
+      unit: W
 ```
 
-→ feeds at `/feeds/living-room.json` and `/feeds/energy.json`.
+→ served at `/feeds/living-room.json` and `/feeds/energy.json`.
 
 ## Connecting Terminus
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1
+
+- **Remove `feeds` from the add-on options/schema.** Feeds have been managed in
+  the config panel (stored in `/data/feeds.json`) since 1.1.0; the deprecated
+  `feeds` option in the **Configuration** tab is now gone. Your existing feeds
+  are unaffected — they live in `/data/feeds.json`. The Configuration tab now
+  holds only `cache_ttl`, `request_timeout` and `log_level`. (If the Supervisor
+  flags a leftover `feeds` key in your saved options after updating, clear it
+  from the Configuration tab.)
+
 ## 1.1.0
 
 - **Feed types:** add a feed as a **Weather feed** (weather entity, feels-like,

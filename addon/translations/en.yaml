@@ -11,8 +11,3 @@ configuration:
   log_level:
     name: Log level
     description: Verbosity of the add-on log.
-  feeds:
-    name: Feeds
-    description: >-
-      One entry per TRMNL screen / sensor combination. Each feed is served at
-      its own URL (/feeds/<slug>.json) for a separate Terminus Poll extension.

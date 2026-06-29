@@ -86,8 +86,8 @@ Start the add-on (enable **Start on boot** + **Watchdog**), then open its
 **config panel** (the add-on's *Open Web UI*, also in the HA sidebar as *TRMNL
 Bridge*). Add **feeds** and pick the weather / feels-like / AQI entities and
 sensor rows from **dropdowns of your HA entities** — no typing entity IDs.
-**Save** applies live. (You can also edit feeds as YAML in the **Configuration**
-tab.) See [`addon/DOCS.md`](addon/DOCS.md) for every option.
+**Save** applies live; feeds are stored in `/data/feeds.json`. See
+[`addon/DOCS.md`](addon/DOCS.md) for every option.
 
 Verify a feed:
 
